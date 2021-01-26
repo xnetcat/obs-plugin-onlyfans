@@ -22,12 +22,12 @@ auth_data = json.loads(auth_file)
 url = f"https://onlyfans.com/api2/v2/users/notifications?limit=10&offset=0&type=message&skip_users_dups=1&app-token={auth_data['app_token']}"
 
 session = requests.Session()
-ctime = str(int(round(time.time() * 1000-301000)))
-       
+ctime = str(int(round(time.time() * 1000 - 301000)))
+
 path = urlparse(url).path
 query = urlparse(url).query
 
-path = path+"?"+query
+path = path + "?" + query
 a = [auth_data["sess"], ctime, path, auth_data["user_agent"], "onlyfans"]
 
 msg = "\n".join(a)
@@ -37,46 +37,39 @@ sha_1 = hash_object.hexdigest()
 
 session.headers["access-token"] = auth_data["sess"]
 session.headers["sign"] = sha_1
-session.headers["time"] = ctime 
-session.headers["accept"] = "application/json, text/plain, */*"  
-session.headers["user-agent"] =  auth_data["user_agent"]
-session.headers["referer"] = 'https://onlyfans.com/'
+session.headers["time"] = ctime
+session.headers["accept"] = "application/json, text/plain, */*"
+session.headers["user-agent"] = auth_data["user_agent"]
+session.headers["referer"] = "https://onlyfans.com/"
 
 auth_cookies = [
-    {'name': 'auth_id', 'value':  auth_data["auth_id"]},
-    {'name': 'sess', 'value': auth_data["sess"]},
-    {'name': 'auth_hash', 'value': ""},
-    {'name': f'auth_uniq_{auth_data["auth_id"]}', 'value': None},
-    {'name': f'auth_uid_{auth_data["auth_id"]}', 'value': None},
+    {"name": "auth_id", "value": auth_data["auth_id"]},
+    {"name": "sess", "value": auth_data["sess"]},
+    {"name": "auth_hash", "value": ""},
+    {"name": f'auth_uniq_{auth_data["auth_id"]}', "value": None},
+    {"name": f'auth_uid_{auth_data["auth_id"]}', "value": None},
 ]
 
 for auth_cookie in auth_cookies:
     session.cookies.set(**auth_cookie)
-    
-if getattr(sys, 'frozen', False):
-    static_folder = os.path.join(sys._MEIPASS, 'static')
+
+if getattr(sys, "frozen", False):
+    static_folder = os.path.join(sys._MEIPASS, "static")
     app = Flask(__name__, static_folder=static_folder)
 else:
     app = Flask(__name__)
 
-@app.route('/')
+
+@app.route("/")
 def send_index():
-    return app.send_static_file('index.html')
+    return app.send_static_file("index.html")
 
-@app.route('/main.js')
-def send_script():
-    return app.send_static_file('main.js')
-
-@app.route('/styles.css')
-def send_style():
-    return app.send_static_file('styles.css')
-
-
-@app.route('/notifications')
+@app.route("/notifications")
 def send_notifications():
     resp = session.get(url).json()
 
     return jsonify(resp)
+
 
 @app.route("/ignore/<username>", methods=["POST", "GET"])
 def ignore_username(username):
@@ -95,7 +88,7 @@ def ignore_username(username):
                 with open("ignore.json", "w") as new_file:
                     obj = {"ignore": []}
                     json.dump(obj, new_file)
-                return jsonify({"ignore": False})          
+                return jsonify({"ignore": False})
     elif request.method == "POST":
         try:
             new_usernames = []
@@ -111,9 +104,10 @@ def ignore_username(username):
                 json.dump(data, file)
                 file.close()
                 return jsonify({"saved": True})
-            
+
         except Exception as e:
             print(e)
             return jsonify({"saved": False})
+
 
 app.run()
