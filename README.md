@@ -59,14 +59,6 @@ To initialize plugin in obs just add browser source and point to the webserver i
 ![server](./docs/server.png)
 ![obs](./docs/obs.png)
 
-## Why would you do this
-
-Obviously it wasn't for my personal use. I created this as a freelacer project but I didn't get response in the end so I am open sourcing this. Maybe someone will find this useful
-
-## Why python and react
-
-I couldn't just create webpage because of the cors policy on onlyfans. So I've created this stupid simple python webserver
-
 ## LICENSE
 
 [MIT License](./LICENSE)
