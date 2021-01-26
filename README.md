@@ -1,6 +1,6 @@
 # obs-plugin-onlyfans
 
-Obs plugin that shows your last subscriber. Created with python and react.
+OBS Plugin that shows your last onlyfans subscriber. Created with python and react.
 
 ## Requirements
 
