@@ -95,7 +95,6 @@ def ignore_username(username):
                 with open("ignore.json", "w") as new_file:
                     obj = {"ignore": []}
                     json.dump(obj, new_file)
-                print(e)
                 return jsonify({"ignore": False})          
     elif request.method == "POST":
         try:
@@ -103,10 +102,8 @@ def ignore_username(username):
             with open("ignore.json", "r") as file:
                 ignore_file = json.load(file)
                 new_usernames = ignore_file["ignore"]
-                print(new_usernames)
                 if username not in new_usernames:
                     new_usernames.append(username)
-                print(new_usernames)
                 file.close()
 
             with open("ignore.json", "w") as file:
