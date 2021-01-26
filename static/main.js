@@ -42,14 +42,19 @@ class App extends React.Component {
   fetchData = async () => {
     const notifications_response = await axios.get("/notifications");
 
-    const notification = await findAsync(notifications_response.data, async (notification) => {
-      const isIgnored_response = await axios.get(`/ignore/${notification.user.username}`)
+    const notification = await findAsync(
+      notifications_response.data,
+      async (notification) => {
+        const isIgnored_response = await axios.get(
+          `/ignore/${notification.user.username}`
+        );
 
-      return isIgnored_response.data.ignore === false
-    })
+        return isIgnored_response.data.ignore === false;
+      }
+    );
 
     if (notification !== undefined) {
-      this.setState({username: notification.user.username, show:true})
+      this.setState({ username: notification.user.username, show: true });
     }
 
     if (this.state.username.length > 0 && notification !== undefined) {
