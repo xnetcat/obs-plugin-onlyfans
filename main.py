@@ -8,18 +8,18 @@ import os
 import sys
 from shutil import copyfile
 
-
 # flask
 from flask import Flask, jsonify, request
 
 # requests
 import requests
 
-
 auth_file = open("auth.json", "r").read()
 auth_data = json.loads(auth_file)
 
-url = f"https://onlyfans.com/api2/v2/users/notifications?limit=10&offset=0&type=subscribed&skip_users_dups=1&app-token={auth_data['app_token']}"
+type = "subscribed"
+
+url = f"https://onlyfans.com/api2/v2/users/notifications?limit=10&offset=0&type={type}&skip_users_dups=1&app-token={auth_data['app_token']}"
 
 session = requests.Session()
 ctime = str(int(round(time.time() * 1000 - 301000)))
