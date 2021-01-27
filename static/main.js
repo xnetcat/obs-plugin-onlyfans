@@ -87,8 +87,13 @@ class App extends React.Component {
       <div class="main" style={{ display: "none" }}>
         {this.state.show == true && (
           <div>
-            <h1 id="text">New onlyfans subscriber!</h1>
-            <h2 id="text">Welcome {this.state.username}</h2>
+            <figure>
+              <img class="logo" src="logo.svg" />
+              <img class="lock" src="lock.svg" />
+
+              <figcaption class="text">+1 SUB!</figcaption>
+            </figure>
+            {/* <h2 id="text">Welcome {this.state.username}</h2> */}
           </div>
         )}
         {this.state.show == false && <div></div>}

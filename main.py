@@ -17,7 +17,7 @@ import requests
 auth_file = open("auth.json", "r").read()
 auth_data = json.loads(auth_file)
 
-type = "subscribed"
+type = "message"
 
 url = f"https://onlyfans.com/api2/v2/users/notifications?limit=10&offset=0&type={type}&skip_users_dups=1&app-token={auth_data['app_token']}"
 
@@ -57,7 +57,7 @@ if getattr(sys, "frozen", False):
     static_folder = os.path.join(sys._MEIPASS, "static")
     app = Flask(__name__, static_folder=static_folder)
 else:
-    app = Flask(__name__)
+    app = Flask(__name__, static_folder="static", static_url_path="/")
 
 
 @app.route("/")
@@ -74,6 +74,7 @@ def send_notifications():
 @app.route("/ignore/<username>", methods=["POST", "GET"])
 def ignore_username(username):
     if request.method == "GET":
+        return jsonify({"ignore": False})
         with open("ignore.json", "r") as file:
             try:
                 ignore_file = json.loads(file.read())
@@ -90,6 +91,7 @@ def ignore_username(username):
                     json.dump(obj, new_file)
                 return jsonify({"ignore": False})
     elif request.method == "POST":
+        return jsonify({"saved": True})
         try:
             new_usernames = []
             with open("ignore.json", "r") as file:
