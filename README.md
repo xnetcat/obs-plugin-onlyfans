@@ -25,7 +25,7 @@ OBS Plugin that shows your last onlyfans subscriber. Created with python and rea
 
 ### Auth
 
-We need some cookies, so head to onlyfans, login and open the network debugger, search for `init?app-token` or something along these lines. And find these values `auth_id`, `sess`, `user-agent` and `app-token`. Save these values to a file called `auth.json` like.
+We need cookies to authorize the requests, so head to onlyfans, login and open the network debugger, search for `init?app-token` or something along these lines. And find `auth_id`, `sess`, `user-agent` and `app-token`. Save these values to a file called `auth.json` like.
 
 Here is how it should look:
 
@@ -54,7 +54,7 @@ To start the plugin just execute `python main.py` or double click the downloaded
 
 ## OBS Configuration
 
-To initialize plugin in obs just add browser source and point to the webserver in my case it's `http://localhost:5000`
+To initialize plugin in obs just add browser source and point to the server in my case it is `http://localhost:5000`
 
 ![server](./docs/server.png)
 ![obs](./docs/obs.png)
