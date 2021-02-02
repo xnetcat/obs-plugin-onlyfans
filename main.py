@@ -17,7 +17,7 @@ import requests
 auth_file = open("auth.json", "r").read()
 auth_data = json.loads(auth_file)
 
-type = "notification"
+type = "subscribed"
 
 url = f"https://onlyfans.com/api2/v2/users/notifications?limit=10&offset=0&type={type}&skip_users_dups=1&app-token={auth_data['app_token']}"
 
