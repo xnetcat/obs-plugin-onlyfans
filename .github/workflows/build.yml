@@ -24,15 +24,15 @@ jobs:
 
     - name: Build the project for Windows
       if: runner.os == 'Windows'
-      run: pyinstaller -w -F --add-data "static;static" main.py
+      run: pyinstaller -F --add-data "static;static" main.py
     
     - name: Build the project for Mac
       if: runner.os == 'macOS'
-      run: pyinstaller -w -F --add-data "static:static" main.py
+      run: pyinstaller -F --add-data "static:static" main.py
 
     - name: Build the project for Linux
       if: runner.os == 'Linux'
-      run: pyinstaller -w -F --add-data "static:static" main.py
+      run: pyinstaller -F --add-data "static:static" main.py
 
     - uses: actions/upload-artifact@v2
       with:
