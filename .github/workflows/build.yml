@@ -30,13 +30,13 @@ jobs:
       if: runner.os == 'macOS'
       run: pyinstaller -w -F --add-data "static:static" main.py
 
-    - name: Build the project for Mac
+    - name: Build the project for Linux
       if: runner.os == 'Linux'
       run: pyinstaller -w -F --add-data "static:static" main.py
 
     - uses: actions/upload-artifact@v2
       with:
-        name: Build
+        name: Build ${{ runner.os }}
         path: dist
 
 
