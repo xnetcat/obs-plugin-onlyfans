@@ -1,0 +1,38 @@
+name: Build Plugin
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        platform: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.platform }}
+    steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-python@v1
+      with:
+        python-version: '3.x'
+        architecture: 'x64'
+    
+    - name: Install requirements
+      run: pip install requests pyinstaller
+
+    - name: Build the project for Windows
+      if: matrix.platform == windows-latest
+      run: pyinstaller -w -F --add-data --add-data "static;static" main.py
+    
+    - name: Build the project for *nix system
+      if: matrix.platform == macos-latest || matrix.platform == ubuntu-latest
+      run: pyinstaller -w -F --add-data --add-data "static:static" main.py
+
+    - uses: actions/upload-artifact@v2
+      with:
+        name: Build
+        path: dist
+
+
