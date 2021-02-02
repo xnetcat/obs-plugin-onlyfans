@@ -23,11 +23,11 @@ jobs:
       run: pip install requests pyinstaller
 
     - name: Build the project for Windows
-      if: matrix.platform == windows-latest
+      if: ${{ matrix.platform }} == windows-latest
       run: pyinstaller -w -F --add-data "static;static" main.py
     
     - name: Build the project for *nix system
-      if: matrix.platform == macos-latest || matrix.platform == ubuntu-latest
+      if: ${{ matrix.platform }} == macos-latest || ${{ matrix.platform }} == ubuntu-latest
       run: pyinstaller -w -F --add-data "static:static" main.py
 
     - uses: actions/upload-artifact@v2
