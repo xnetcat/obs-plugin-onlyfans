@@ -20,7 +20,7 @@ jobs:
         architecture: 'x64'
     
     - name: Install requirements
-      run: pip install requests pyinstaller
+      run: pip install requests pyinstaller flask
 
     - name: Build the project for Windows
       if: runner.os == 'Windows'
