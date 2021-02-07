@@ -18,7 +18,7 @@ OBS Plugin that shows your last onlyfans subscriber. Created with python and rea
 
 ### Downloading and installing requirements
 
-1. Download and unpack the bot from [here](https://github.com/xnetcat/obs-plugin-onlyfans/archive/master.zip) or git clone the repo
+1. Download and unpack the script from [here](https://github.com/xnetcat/obs-plugin-onlyfans/archive/master.zip) or git clone the repo
 2. pip install -r requirements.txt
 
 ## Configuration
